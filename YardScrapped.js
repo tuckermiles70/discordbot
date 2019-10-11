@@ -71,10 +71,11 @@ async function play(receivedMessage) {
     let channel = client.channels.get('317112476300869634');
     //channel.join()
     
+    //TODO:
     //let validate = await YTDL.validateURL(args[0]);
     //let info = await YTDL.getInfo(https://www.youtube.com/watch?v=wXhTHyIgQ_U");
-    let connection = await receivedMessage.channel.join();
-    let dispatcher = await connection.play(YTDL("https://www.youtube.com/watch?v=wXhTHyIgQ_U", { filter: 'audioonly' }));
+    //let connection = await channel.join();
+    //let dispatcher = await connection.play(YTDL("https://www.youtube.com/watch?v=wXhTHyIgQ_U", { filter: 'audioonly' }));
 }
 
 
