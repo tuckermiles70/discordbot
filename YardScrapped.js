@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fetch = require("node-fetch"); //To make IFTTT request
+const YTDL = require("ytdl-core");
 
 //Pull key and web requests from config file
 const { bot_secret_token, tlamp_on, tlamp_off } = require('./config.json');
@@ -40,7 +41,7 @@ function processCommand(receivedMessage) {
 
     //MUSIC
     else if (primaryCommand == "play"){
-
+        play(receivedMessage);
     }
 
     //Error output
@@ -66,6 +67,15 @@ function lightsCommand(arguments, receivedMessage) {
 }
 
 //MUSIC
+async function play(receivedMessage) {
+    let channel = client.channels.get('317112476300869634');
+    //channel.join()
+    
+    //let validate = await YTDL.validateURL(args[0]);
+    //let info = await YTDL.getInfo(https://www.youtube.com/watch?v=wXhTHyIgQ_U");
+    let connection = await receivedMessage.channel.join();
+    let dispatcher = await connection.play(YTDL("https://www.youtube.com/watch?v=wXhTHyIgQ_U", { filter: 'audioonly' }));
+}
 
 
 /*
