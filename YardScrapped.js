@@ -11,27 +11,29 @@ client.on('ready', () => {
 })
 
 client.on('message', (receivedMessage) => {
-    if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
+    if (receivedMessage.author == client.user) { //Prevent bot from responding to its own messages
         return
     }
-    
     if (receivedMessage.content.startsWith("#")) {
         processCommand(receivedMessage)
     }
 })
 
 function processCommand(receivedMessage) {
-    let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
-    let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
-    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+    let fullCommand = receivedMessage.content.substr(1) //Remove the leading exclamation mark
+    let splitCommand = fullCommand.split(" ") //Split the message up in to pieces for each space
+    let primaryCommand = splitCommand[0] // Thefirst word directly after the exclamation is the command
+    let arguments = splitCommand.slice(1) // Allother words are arguments/parameters/options for the command
 
     console.log("Command received: " + primaryCommand)
-    console.log("Arguments: " + arguments) // There may not be any arguments
+    console.log("Arguments: " + arguments) //There may not be any arguments
 
     if (primaryCommand == "lights") {
         receivedMessage.channel.send("Lights action triggered.");
         lightsCommand(arguments, receivedMessage);
+    }else if (primaryCommand == "off") {
+        receivedMessage.channel.send("Goodbye.");
+        process.exit();
     } else {
         //add "Try `!help` or `!multiply`"
         receivedMessage.channel.send("I don't understand the command.")
@@ -51,6 +53,8 @@ function lightsCommand(arguments, receivedMessage) {
         fetch(tlamp_off);
     }
 }
+
+
 
 /*
 client.on('ready', () => {
