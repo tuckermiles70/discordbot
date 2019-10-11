@@ -1,13 +1,51 @@
-const Discord = require('discord.js')
-const client = new Discord.Client()
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const fetch = require("node-fetch"); //To make IFTTT request
 
-//pull key from config file
-const { bot_secret_token } = require('./config.json');
+//Pull key and web requests from config file
+const { bot_secret_token, tlamp_on } = require('./config.json');
 
 client.on('ready', () => {
-    var generalChannel = client.channels.get("317112475814461440") // Replace with known channel ID
-    generalChannel.send("Hello, world!")  
+    // Set bot status to: "Playing with JavaScript"
+    client.user.setActivity("with JavaScript")
 })
+
+client.on('message', (receivedMessage) => {
+    if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
+        return
+    }
+    
+    if (receivedMessage.content.startsWith("#")) {
+        processCommand(receivedMessage)
+    }
+})
+
+function processCommand(receivedMessage) {
+    let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
+    let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
+    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
+    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+
+    console.log("Command received: " + primaryCommand)
+    console.log("Arguments: " + arguments) // There may not be any arguments
+
+    if (primaryCommand == "lights") {
+        receivedMessage.channel.send("Lights action triggered. IFTTT web request has been made.");
+        fetch(tlamp_on);
+    } else {
+        //add "Try `!help` or `!multiply`"
+        receivedMessage.channel.send("I don't understand the command.")
+    }
+}
+
+
+
+/*
+client.on('ready', () => {
+    var generalChannel = client.channels.get("317112475814461440") // Replace with known channel ID
+    generalChannel.send("this is a test and my name is tucker")  
+})
+*/
 
 // Get your bot's secret token from:
 // https://discordapp.com/developers/applications/
