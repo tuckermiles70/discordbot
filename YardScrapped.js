@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const fetch = require("node-fetch"); //To make IFTTT request
 
 //Pull key and web requests from config file
-const { bot_secret_token, tlamp_on } = require('./config.json');
+const { bot_secret_token, tlamp_on, tlamp_off } = require('./config.json');
 
 client.on('ready', () => {
     // Set bot status to: "Playing with JavaScript"
@@ -30,12 +30,27 @@ function processCommand(receivedMessage) {
     console.log("Arguments: " + arguments) // There may not be any arguments
 
     if (primaryCommand == "lights") {
-        receivedMessage.channel.send("Lights action triggered. IFTTT web request has been made.");
-        fetch(tlamp_on);
+        receivedMessage.channel.send("Lights action triggered.");
+        lightsCommand(arguments, receivedMessage);
     } else {
         //add "Try `!help` or `!multiply`"
         receivedMessage.channel.send("I don't understand the command.")
     }
+}
+
+function lightsCommand(arguments, receivedMessage) {
+    if (arguments.length > 2) {
+        receivedMessage.channel.send("I don't understand the command.")
+    }
+    else if(arguments[0] == "lamp" && arguments[1] == "on") {
+        receivedMessage.channel.send("IFTTT request made to turn on Tucker's Bedroom Lamp!");
+        fetch(tlamp_on);
+    }
+    else if(arguments[0] == "lamp" && arguments[1] == "off") {
+        receivedMessage.channel.send("IFTTT request made to turn off Tucker's Bedroom Lamp!");
+        fetch(tlamp_off);
+    }
+
 }
 
 
