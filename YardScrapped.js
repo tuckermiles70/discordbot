@@ -52,6 +52,9 @@ function lightsCommand(arguments, receivedMessage) {
     }
 
 }
+
+"bot_secret_token" : "NjI1MTU4NDI4OTk3ODQ1MDIy.XZ-Fzw.bgbQ5oxwepsHuKoI8gwNSRBU6j0",
+
 /*
 client.on('ready', () => {
     var generalChannel = client.channels.get("317112475814461440") // Replace with known channel ID
