@@ -28,18 +28,29 @@ function processCommand(receivedMessage) {
     console.log("Command received: " + primaryCommand)
     console.log("Arguments: " + arguments) //There may not be any arguments
 
+    //HOME AUTOMATION
     if (primaryCommand == "lights") {
         receivedMessage.channel.send("Lights action triggered.");
         lightsCommand(arguments, receivedMessage);
-    }else if (primaryCommand == "off") {
+    }
+    else if (primaryCommand == "off") {
         receivedMessage.channel.send("Goodbye.");
         process.exit();
-    } else {
+    }
+
+    //MUSIC
+    else if (primaryCommand == "play"){
+
+    }
+
+    //Error output
+    else {
         //add "Try `!help` or `!multiply`"
         receivedMessage.channel.send("I don't understand the command.")
     }
 }
 
+//HOME AUTOMATION
 function lightsCommand(arguments, receivedMessage) {
     if (arguments.length > 2) {
         receivedMessage.channel.send("I don't understand the command.")
@@ -54,6 +65,7 @@ function lightsCommand(arguments, receivedMessage) {
     }
 }
 
+//MUSIC
 
 
 /*
