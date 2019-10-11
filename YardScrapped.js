@@ -50,10 +50,7 @@ function lightsCommand(arguments, receivedMessage) {
         receivedMessage.channel.send("IFTTT request made to turn off Tucker's Bedroom Lamp!");
         fetch(tlamp_off);
     }
-
 }
-
-"bot_secret_token" : "NjI1MTU4NDI4OTk3ODQ1MDIy.XZ-Fzw.bgbQ5oxwepsHuKoI8gwNSRBU6j0",
 
 /*
 client.on('ready', () => {
