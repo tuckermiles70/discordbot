@@ -69,7 +69,8 @@ function lightsCommand(arguments, receivedMessage) {
 //Skribble stuff
 function skribble(arguments, receivedMessage) {
     receivedMessage.channel.send("Received these words:");
-    for (i = 0; i < arguments.length; i++) {
+    length = arguments.length;
+    for (i = 0; i < length; i++) {
         receivedMessage.channel.send(arguments[i]);
     }
     receivedMessage.channel.send("Words successfully added to Firebase DB use \"\#Skribble wordlist\" to view all stored words as a comma separated list");
