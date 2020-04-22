@@ -38,11 +38,11 @@ function processCommand(receivedMessage) {
         receivedMessage.channel.send("Goodbye.");
         process.exit();
     }
-
-    //MUSIC
-    else if (primaryCommand == "play"){
-        play(receivedMessage);
+    else if (primaryCommand == "skribble") {
+        // receivedMessage.channel.send("Enter white space delimited list of words for Skribble");
+        skribble(arguments, receivedMessage);
     }
+
 
     //Error output
     else {
@@ -66,23 +66,13 @@ function lightsCommand(arguments, receivedMessage) {
     }
 }
 
-//MUSIC
-async function play(receivedMessage) {
-    let channel = client.channels.get('317112476300869634');
-    //channel.join()
+//Skribble stuff
+function skribble(arguments, receivedMessage) {
+    receivedMessage.channel.send("Received these words:");
+    for (i = 0; i < arguments.length; i++) {
+        receivedMessage.channel.send(arguments[i]);
+    }
+    receivedMessage.channel.send("Words successfully added to Firebase DB use \"\#Skribble wordlist\" to view all stored words as a comma separated list");
     
-    //TODO:
-    //let validate = await YTDL.validateURL(args[0]);
-    //let info = await YTDL.getInfo(https://www.youtube.com/watch?v=wXhTHyIgQ_U");
-    //let connection = await channel.join();
-    //let dispatcher = await connection.play(YTDL("https://www.youtube.com/watch?v=wXhTHyIgQ_U", { filter: 'audioonly' }));
 }
-
-
-/*
-client.on('ready', () => {
-    var generalChannel = client.channels.get("317112475814461440") // Replace with known channel ID
-    generalChannel.send("this is a test and my name is tucker")  
-})
-*/
 client.login(bot_secret_token)
